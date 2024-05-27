@@ -27,8 +27,7 @@ const slice = createSlice({
     },
 
     favMoviesUpdated: (movies, action: PayloadAction<Movie>) => {
-      movies.favMovies.push(action.payload);
-      console.log(current(movies.favMovies));
+      if (!movies.favMovies.find(({ id }) => id === action.payload.id)) movies.favMovies.push(action.payload);
     },
 
     favMoviesRemoved: (movies, action: PayloadAction<Movie>) => {

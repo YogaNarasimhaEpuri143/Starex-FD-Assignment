@@ -1,8 +1,9 @@
 import StarIcon from "./StarIcon";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { MovieStruc } from "../services/movies-service";
+import { RootState } from "../store/configureStore";
 
 interface CardProps {
   movieItem: MovieStruc;
@@ -10,9 +11,10 @@ interface CardProps {
 }
 
 const Card = ({ movieItem, action }: CardProps) => {
-  const { movie, imdb_url, rating } = movieItem;
+  const { id: movieId, movie, imdb_url, rating } = movieItem;
 
   const dispatch = useDispatch();
+  const favMovies = useSelector((store: RootState) => store.movie.favMovies);
 
   return (
     <div className="relative">
@@ -28,7 +30,7 @@ const Card = ({ movieItem, action }: CardProps) => {
       </a>
 
       <div className="absolute top-1 right-1" onClick={() => dispatch(action(movieItem))}>
-        <StarIcon isFavorited={false} />
+        <StarIcon isFavorited={favMovies.find(({ id }) => id === movieId) ? true : false} />
       </div>
     </div>
   );
