@@ -2,8 +2,6 @@ import Shimmer from "./Shimmer";
 import useMovies from "../hooks/useMovies";
 import Card from "./Card";
 
-import { favMoviesUpdated } from "../store/movies";
-
 const Cards = () => {
   const { movies, error } = useMovies();
 
@@ -12,7 +10,7 @@ const Cards = () => {
   if (!movies) return <Shimmer />;
 
   const dispMovies = movies.map((movieItem) => {
-    return <Card key={movieItem.id} movieItem={movieItem} action={favMoviesUpdated} />;
+    return <Card key={movieItem.id} movieItem={movieItem} />;
   });
 
   return (

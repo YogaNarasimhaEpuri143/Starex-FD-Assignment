@@ -5,12 +5,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { MovieStruc } from "../services/movies-service";
 import { RootState } from "../store/configureStore";
 
+import { favMoviesUpdated, favMoviesRemoved } from "../store/movies";
+
 interface CardProps {
   movieItem: MovieStruc;
-  action: (payload: MovieStruc) => { type: string; payload: MovieStruc };
 }
 
-const Card = ({ movieItem, action }: CardProps) => {
+const Card = ({ movieItem }: CardProps) => {
   const { id: movieId, movie, imdb_url, rating } = movieItem;
 
   const dispatch = useDispatch();
@@ -29,7 +30,7 @@ const Card = ({ movieItem, action }: CardProps) => {
         </div>
       </a>
 
-      <div className="absolute top-1 right-1" onClick={() => dispatch(action(movieItem))}>
+      <div className="absolute top-1 right-1" onClick={() => dispatch(favMovies.find(({ id }) => id === movieId) ? favMoviesRemoved(movieItem) : favMoviesUpdated(movieItem))}>
         <StarIcon isFavorited={favMovies.find(({ id }) => id === movieId) ? true : false} />
       </div>
     </div>
@@ -37,3 +38,9 @@ const Card = ({ movieItem, action }: CardProps) => {
 };
 
 export default Card;
+
+//
+// action: (payload: MovieStruc) => {
+//   type: string;
+//   payload: MovieStruc;
+// };

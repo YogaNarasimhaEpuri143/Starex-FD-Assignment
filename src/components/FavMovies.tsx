@@ -1,6 +1,4 @@
 import Shimmer from "./Shimmer";
-
-import { favMoviesRemoved } from "../store/movies";
 import { useSelector } from "react-redux";
 
 import { RootState } from "./../store/configureStore";
@@ -15,7 +13,7 @@ const FavouriteMovies = () => {
   if (!favMovies) return <Shimmer />;
 
   const dispMovies = favMovies.map((movieItem) => {
-    return <Card key={movieItem.id} movieItem={movieItem} action={favMoviesRemoved} />;
+    return <Card key={movieItem.id} movieItem={movieItem} />;
   });
 
   return (
