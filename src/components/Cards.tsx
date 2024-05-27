@@ -15,7 +15,6 @@ const Cards = () => {
 
   return (
     <>
-      {error && <p>{error}</p>}
       <div className="container mx-auto px-4 py-8">
         <div className="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">{dispMovies}</div>
       </div>
@@ -45,9 +44,8 @@ export default Cards;
  * Effect Dependencies & Clean-Up
  * Fetching Data
  * Cancelling a Fetch Request
- * Reusable API Client
- * Movie Service
+ * Reusable API Client                --> Not to repeat the Base URL.
+ * Movie Service                      --> Component not to know, about endpoints, http methods, all http logic.  (Like Chef)
  * Generic HTTP Service
- * Custom Data Fetching Hook
- *
+ * Custom Data Fetching Hook          --> For Reusablility if any Another Component needed the same data.
  */
