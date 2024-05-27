@@ -1,13 +1,10 @@
-import StarIcon from "./StarIcon";
 import Shimmer from "./Shimmer";
 import useMovies from "../hooks/useMovies";
+import Card from "./Card";
 
-import { useDispatch } from "react-redux";
 import { favMoviesUpdated } from "../store/movies";
 
 const Cards = () => {
-  const dispatch = useDispatch();
-
   const { movies, error } = useMovies();
 
   if (error) return <p className="text-danger">{error}</p>;
@@ -15,26 +12,7 @@ const Cards = () => {
   if (!movies) return <Shimmer />;
 
   const dispMovies = movies.map((movieItem) => {
-    const { id, movie, rating, imdb_url } = movieItem;
-
-    return (
-      <div key={id} className="relative">
-        <a href={imdb_url} target="_blank">
-          <div className="bg-gray-800 rounded-lg overflow-hidden shadow-lg">
-            <img src="https://via.placeholder.com/300x450" alt="Movie Poster" className="w-full h-64 object-cover" />
-
-            <div className="p-4">
-              <h2 className="text-xl font-semibold mb-2 text-gray-50">{movie}</h2>
-              <p className="text-gray-400">Rating: {rating}</p>
-            </div>
-          </div>
-        </a>
-
-        <div className="absolute top-1 right-1" onClick={() => dispatch(favMoviesUpdated(movieItem))}>
-          <StarIcon isFavorited={false} />
-        </div>
-      </div>
-    );
+    return <Card key={movieItem.id} movieItem={movieItem} action={favMoviesUpdated} />;
   });
 
   return (
