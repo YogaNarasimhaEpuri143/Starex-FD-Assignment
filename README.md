@@ -1,4 +1,4 @@
-
+# `Deployed Lik` :- https://scintillating-hotteok-c3e869.netlify.app/
 ## Steps to Run Application
 
 1. git clone https://github.com/YogaNarasimhaEpuri143/Starex-FD-Assignment.git
